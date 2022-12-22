@@ -1,9 +1,9 @@
 
-# GROUPING_ID
+# grouping_id
 
 ## 功能
 
-GROUPING_ID用于区分相同分组标准的分组统计结果。
+用于区分相同分组标准的分组统计结果。
 
 ## 语法
 
@@ -13,7 +13,11 @@ GROUPING_ID(expr)
 
 ## 参数说明
 
-`epxr`: 条件表达式。
+`epxr`: 条件表达式，表达式的结果需要是 BIGINT 类型。
+
+## 返回值说明
+
+返回 BIGINT 类型的值。
 
 ## 示例
 
