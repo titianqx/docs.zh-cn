@@ -7,7 +7,7 @@ Hive catalog 是一个外部数据目录 (external catalog)。StarRocks 2.3 及�
 ## 使用说明
 
 - StarRocks 支持查询如下格式的 Hive 数据：Parquet、ORC 和 CSV。
-- StarRocks 支持查询如下类型的 Hive 数据：TINYINT、SMALLINT、DATE、BOOLEAN、INTEGER、BIGINT、TIMESTAMP、STRING、VARCHAR、CHAR、DOUBLE、FLOAT、DECIMAL、ARRAY、MAP 和 STRUCT。不支持的数据类型包括：INTERVAL、BINARY  和 UNION。
+- StarRocks 不支持查询如下类型的 Hive 数据：INTERVAL、BINARY 和 UNION。
 
     > **说明**
     >
@@ -285,6 +285,8 @@ StarRocks 当前支持两种更新元数据缓存的策略：异步更新和自�
     | ---------------------------------- | -------- | ------------------------------------------------------------ |
     | enable_hms_events_incremental_sync | 否       | 是否开启元数据缓存自动增量更新，取值包括：<ul><li>`TRUE`：表示开启。</li><li>`FALSE`：表示未开启，为默认值。</li></ul>如要为该 Hive catalog 开启自动增量更新策略，需将该参数值设置为 `TRUE`。 |
 
+创建完 Hive catalog 后即可查询 Hive 集群中的数据。详细信息，请参见[查询外部数据](../catalog/query_external_data.md)。
+
 ## 元数据缓存更新
 
 StarRocks 需要利用元数据服务中的 Hive 表或分区的元数据（例如表结构）和存储系统中表或分区的数据文件元数据（例如文件大小）来生成查询执行计划。因此请求访问 Hive 元数据服务和存储系统的时间直接影响了查询所消耗的时间。为了降低这种影响，StarRocks 提供元数据缓存能力，即将 Hive 表或分区的元数据和其数据文件元数据缓存在 StarRocks 中并维护更新。
@@ -368,10 +370,6 @@ Event listener 可以对 Hive metastore 中的 event（例如增减分区、增�
 | hms_events_batch_size_per_rpc      | StarRocks 每次读取 event 的最大数量，默认值为 `500`。        |
 | enable_hms_parallel_process_evens  | 是否并行处理读取的 event ，取值包括：<ul><li>`TRUE`：表示并行处理，为默认值。</li><li>`FALSE`：表示不并行处理。</li></ul>  |
 | hms_process_events_parallel_num    | 每次处理 event 的并发数，默认值为 `4`。                      |
-
-## 下一步
-
-在创建完 Hive catalog 并做完相关的配置后即可查询 Hive 集群中的数据。详细信息，请参见[查询外部数据](../catalog/query_external_data.md)。
 
 ## 相关操作
 
